@@ -1,5 +1,5 @@
 from typing import Optional
-def translate(json_data: dict, *, separator = ";", file = None) -> Optional[str]:
+def translate(json_data: dict, *, separator = ";", file = None, file_and_return = False) -> Optional[str]:
   lines = ["", ""]
   done = 0
   for i, j in json_data.items():
@@ -19,5 +19,9 @@ def translate(json_data: dict, *, separator = ";", file = None) -> Optional[str]
       nl.append(i[:-len(separator)])
   if file is None:
     return "\n".join(nl)
+  if file_and_return:
+    result = "\n".join(nl)
+    file.write(result)
+    return result
   file.write("\n".join(nl))
   return
